@@ -2070,3 +2070,224 @@ footer {
 ::-webkit-scrollbar-track { background: var(--light); }
 ::-webkit-scrollbar-thumb { background: var(--primary-light); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--primary); }
+
+/* =============================================
+   GRID UTILITY CLASSES (mobile-ready)
+   ============================================= */
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+@media (max-width: 900px) {
+  .grid-3 { grid-template-columns: repeat(2, 1fr); }
+  .grid-4 { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .grid-3 { grid-template-columns: 1fr; }
+  .grid-2 { grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) {
+  .grid-4 { grid-template-columns: 1fr; }
+}
+
+/* =============================================
+   MOBILE — GLOBAL ADJUSTMENTS
+   ============================================= */
+
+/* Prevent iOS Safari font-size zoom on inputs */
+@media (max-width: 768px) {
+  .form-input,
+  .form-select,
+  .form-textarea {
+    font-size: 16px;
+  }
+}
+
+/* Section padding reduced on mobile */
+@media (max-width: 768px) {
+  .section       { padding: 52px 0; }
+  .section-sm    { padding: 36px 0; }
+  .section-lg    { padding: 72px 0; }
+  .section-header { margin-bottom: 40px; }
+  .container     { padding: 0 16px; }
+  .container-sm  { padding: 0 16px; }
+}
+
+/* Alert banner — compact on mobile */
+@media (max-width: 600px) {
+  .alert-banner {
+    font-size: 0.78rem;
+    padding: 10px 12px;
+    gap: 6px;
+    line-height: 1.4;
+  }
+  .alert-banner i { display: none; }
+}
+
+/* Page hero — reduce top padding on mobile
+   (alert-height handled by JS, this ensures
+   we don't cut content on small screens) */
+@media (max-width: 768px) {
+  .page-hero {
+    padding-top: 120px;
+    padding-bottom: 52px;
+  }
+  .page-hero-title { font-size: clamp(1.7rem, 7vw, 2.5rem); }
+  .page-hero-desc  { font-size: 1rem; }
+}
+
+/* Hero section mobile */
+@media (max-width: 480px) {
+  .hero-badge { font-size: 0.7rem; padding: 6px 14px; letter-spacing: 1px; }
+  .hero-description { font-size: 1rem; }
+  .hero-actions { flex-direction: column; align-items: center; }
+  .hero-actions .btn { width: 100%; justify-content: center; }
+}
+
+/* Stats on very small screens */
+@media (max-width: 360px) {
+  .stats-grid { grid-template-columns: 1fr 1fr; gap: 20px; }
+  .stat-number { font-size: 2rem; }
+}
+
+/* Nav mobile dropdown — dynamic top set by JS,
+   fallback default here */
+body.has-alert .nav-links-mobile-offset {
+  /* Updated by JS */
+}
+
+/* Mission card — reduce padding on mobile */
+@media (max-width: 768px) {
+  .mission-card-main { padding: 32px 24px; }
+  .mission-quote     { font-size: 1.1rem; }
+}
+
+/* Steps grid — reduce padding on mobile */
+@media (max-width: 600px) {
+  .step-card { padding: 28px 20px; }
+}
+
+/* Testimonial grid — reduce padding on mobile */
+@media (max-width: 600px) {
+  .testimonial-card { padding: 24px 20px; }
+  .testimonial-placeholder { padding: 24px; }
+}
+
+/* CTA donate — reduce padding on mobile */
+@media (max-width: 768px) {
+  .cta-donate-desc { font-size: 1rem; }
+  .cta-donate-actions { flex-direction: column; align-items: center; }
+  .cta-donate-actions .btn { width: 100%; justify-content: center; max-width: 320px; }
+}
+
+/* Donation widget — reduce padding */
+@media (max-width: 768px) {
+  .donation-widget-placeholder { padding: 40px 20px; }
+  .donation-widget-placeholder i { font-size: 2.5rem; }
+}
+
+/* Donation amounts — single column on very small */
+@media (max-width: 480px) {
+  .donation-amounts { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .donation-amount-btn { padding: 18px 10px; }
+  .donation-amount-btn .amount { font-size: 1.4rem; }
+}
+@media (max-width: 360px) {
+  .donation-amounts { grid-template-columns: 1fr; }
+}
+
+/* Fiscal box — stack on mobile */
+@media (max-width: 600px) {
+  .fiscal-box { flex-direction: column; align-items: flex-start; }
+}
+
+/* Legal tables — horizontal scroll on mobile */
+.legal-content .table-wrapper {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 24px 0;
+  border-radius: var(--radius-sm);
+}
+.legal-content .table-wrapper table {
+  margin: 0;
+  min-width: 540px;
+}
+
+/* Contact info card — reduce padding */
+@media (max-width: 600px) {
+  .contact-info-card { padding: 28px 20px; }
+}
+
+/* Founder grid — reduce gap */
+@media (max-width: 600px) {
+  .founder-grid { gap: 28px; }
+  .founder-name { font-size: 1.5rem; }
+}
+
+/* Value cards — 2 col on tablet, 1 on small mobile */
+@media (max-width: 600px) {
+  .values-grid { grid-template-columns: 1fr; }
+}
+
+/* Action cards — 2 col on tablet */
+@media (max-width: 900px) {
+  .actions-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .actions-grid { grid-template-columns: 1fr; }
+}
+
+/* Footer columns — stack fully on small mobile */
+@media (max-width: 400px) {
+  .footer-bottom-content { align-items: flex-start; }
+  .footer-legal-links { flex-direction: column; gap: 8px; }
+}
+
+/* Cookie banner — full button width on mobile */
+@media (max-width: 480px) {
+  .cookie-banner { padding: 16px; gap: 12px; }
+  .cookie-actions { flex-direction: column; }
+  .btn-cookie-accept,
+  .btn-cookie-refuse,
+  .btn-cookie-settings { width: 100%; text-align: center; }
+}
+
+/* Back-to-top — avoid overlap with cookie banner */
+@media (max-width: 768px) {
+  #backTop {
+    bottom: 80px !important;
+    right: 16px !important;
+    width: 42px !important;
+    height: 42px !important;
+  }
+}
+
+/* Btn-lg slightly smaller on mobile */
+@media (max-width: 480px) {
+  .btn-lg { padding: 14px 28px; font-size: 0.95rem; }
+  .btn    { white-space: normal; text-align: center; }
+}
+
+/* Partner logos — smaller on mobile */
+@media (max-width: 600px) {
+  .partner-logo { width: 130px; height: 65px; }
+  .partners-grid { gap: 16px; }
+}
+
+/* Section header — smaller margin on mobile */
+@media (max-width: 480px) {
+  .section-header { margin-bottom: 28px; }
+  .section-subtitle { font-size: 0.95rem; }
+}

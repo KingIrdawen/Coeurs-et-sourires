@@ -5,8 +5,42 @@
 
 document.addEventListener('DOMContentLoaded', function () {
 
-  /* -------- Navbar scroll effect -------- */
+  /* -------- Dynamic header positioning (alert banner aware) -------- */
+  const alertBanner = document.querySelector('.alert-banner');
   const navbar = document.querySelector('.navbar');
+
+  function getAlertHeight() {
+    return alertBanner ? alertBanner.offsetHeight : 0;
+  }
+
+  function updateHeaderPositions() {
+    if (!navbar) return;
+    const alertH = getAlertHeight();
+    const navH = 80; // fixed nav height
+
+    // Reposition navbar below alert banner
+    navbar.style.top = alertH + 'px';
+
+    // Reposition mobile dropdown below navbar
+    const navLinks = document.querySelector('.nav-links');
+    if (navLinks && window.innerWidth <= 900) {
+      navLinks.style.top = (alertH + navH) + 'px';
+    } else if (navLinks) {
+      navLinks.style.top = '';
+    }
+
+    // Adjust hero/page-hero top margin to avoid overlap
+    const hero = document.querySelector('.hero');
+    if (hero) hero.style.marginTop = alertH + 'px';
+
+    const pageHero = document.querySelector('.page-hero');
+    if (pageHero) pageHero.style.paddingTop = (alertH + navH + 40) + 'px';
+  }
+
+  updateHeaderPositions();
+  window.addEventListener('resize', updateHeaderPositions, { passive: true });
+
+  /* -------- Navbar scroll effect -------- */
   if (navbar) {
     function handleScroll() {
       if (window.scrollY > 60) {
@@ -25,6 +59,8 @@ document.addEventListener('DOMContentLoaded', function () {
   if (navToggle && navLinks) {
     navToggle.addEventListener('click', function () {
       navLinks.classList.toggle('open');
+      // Re-sync dropdown position when opened
+      updateHeaderPositions();
       const spans = navToggle.querySelectorAll('span');
       if (navLinks.classList.contains('open')) {
         spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
