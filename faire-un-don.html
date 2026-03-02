@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Faites un don à l'association Coeurs et Sourires et offrez un sourire à un enfant hospitalisé. Don sécurisé en ligne." />
+  <title>Faire un don – Association Coeurs et Sourires</title>
+  <link rel="icon" type="image/png" href="images/Logo_détouré.png" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+
+  <div class="alert-banner">
+    <i class="fas fa-star"></i>
+    <span>L'association Coeurs et Sourires est actuellement en cours de validation officielle. Les dons seront actifs très bientôt&nbsp;!</span>
+  </div>
+
+  <nav class="navbar solid" style="top:44px">
+    <div class="nav-container">
+      <a href="index.html" class="nav-logo">
+        <img src="images/Logo_détouré.png" alt="Logo Association Coeurs et Sourires" />
+        <div class="nav-logo-text">
+          <span class="nav-logo-name">Coeurs et Sourires</span>
+          <span class="nav-logo-tagline">Association</span>
+        </div>
+      </a>
+      <button class="nav-toggle" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-links">
+        <a href="index.html">Accueil</a>
+        <a href="nous-connaitre.html">Nous connaître</a>
+        <a href="nos-actions.html">Nos actions</a>
+        <a href="contact.html">Contact</a>
+        <a href="faire-un-don.html" class="btn btn-primary btn-sm nav-cta active">
+          <i class="fas fa-heart"></i> Faire un don
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== PAGE HERO ===== -->
+  <section class="page-hero" style="margin-top:44px">
+    <div class="page-hero-stars"></div>
+    <div class="container page-hero-content">
+      <span class="section-label">Agissez maintenant</span>
+      <h1 class="page-hero-title">Faire un <span>don</span></h1>
+      <p class="page-hero-desc">Votre générosité transforme des jours difficiles en moments de bonheur pour les enfants hospitalisés.</p>
+      <nav class="breadcrumb" aria-label="Fil d'Ariane">
+        <a href="index.html">Accueil</a>
+        <i class="fas fa-chevron-right"></i>
+        <span>Faire un don</span>
+      </nav>
+    </div>
+  </section>
+
+  <!-- ===== POURQUOI DONNER ===== -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Votre impact</span>
+        <h2 class="section-title">Pourquoi <span>donner</span>&nbsp;?</h2>
+        <div class="rainbow-bar"></div>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:28px; margin-bottom:60px;">
+        <div style="text-align:center; padding:32px 20px;">
+          <span style="font-size:3rem; display:block; margin-bottom:16px;">🎁</span>
+          <h3 style="color:var(--primary); font-size:1rem; margin-bottom:10px;">100% pour les enfants</h3>
+          <p style="color:var(--text-muted); font-size:0.88rem; line-height:1.7;">La totalité de votre don est utilisée pour acheter des cadeaux destinés aux enfants hospitalisés.</p>
+        </div>
+        <div style="text-align:center; padding:32px 20px;">
+          <span style="font-size:3rem; display:block; margin-bottom:16px;">🔒</span>
+          <h3 style="color:var(--primary); font-size:1rem; margin-bottom:10px;">Don sécurisé</h3>
+          <p style="color:var(--text-muted); font-size:0.88rem; line-height:1.7;">Vos paiements sont sécurisés. Nous utilisons des plateformes certifiées pour tous les dons en ligne.</p>
+        </div>
+        <div style="text-align:center; padding:32px 20px;">
+          <span style="font-size:3rem; display:block; margin-bottom:16px;">📋</span>
+          <h3 style="color:var(--primary); font-size:1rem; margin-bottom:10px;">Reçu fiscal</h3>
+          <p style="color:var(--text-muted); font-size:0.88rem; line-height:1.7;">Un reçu fiscal vous sera envoyé pour chaque don, vous permettant de bénéficier de la réduction d'impôt.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== MONTANTS SUGGÉRÉS ===== -->
+  <section class="section-sm bg-light">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label">Choisissez votre don</span>
+        <h2 class="section-title">Quel impact pour <span>votre don</span>&nbsp;?</h2>
+        <p class="section-subtitle">Chaque montant, aussi modeste soit-il, a un impact concret sur la vie d'un enfant.</p>
+        <div class="rainbow-bar"></div>
+      </div>
+      <div class="donation-amounts">
+        <button class="donation-amount-btn" onclick="selectAmount(this, 10)">
+          <span class="amount">10€</span>
+          <span class="impact">Un livre ou une petite peluche pour un enfant</span>
+        </button>
+        <button class="donation-amount-btn active" onclick="selectAmount(this, 25)">
+          <span class="amount">25€</span>
+          <span class="impact">Un jeu de société ou un kit créatif complet</span>
+        </button>
+        <button class="donation-amount-btn" onclick="selectAmount(this, 50)">
+          <span class="amount">50€</span>
+          <span class="impact">Un cadeau personnalisé de qualité pour un enfant</span>
+        </button>
+        <button class="donation-amount-btn" onclick="selectAmount(this, 100)">
+          <span class="amount">100€</span>
+          <span class="impact">Des cadeaux pour plusieurs enfants d'un même service</span>
+        </button>
+      </div>
+      <div style="text-align:center; margin-bottom:40px;">
+        <p style="font-size:0.9rem; color:var(--text-muted);">Vous souhaitez donner un autre montant ?</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== WIDGET DON ===== -->
+  <section class="section">
+    <div class="container-sm">
+
+      <!-- [PLACEHOLDER] Widget HelloAsso -->
+      <!-- Pour activer les dons en ligne, créez un compte sur HelloAsso (https://www.helloasso.com)
+           ou Stripe, configurez votre collecte et remplacez ce bloc par leur widget/iframe officiel.
+           Exemple HelloAsso :
+           <iframe id="haWidgetCrowdfunding" src="https://www.helloasso.com/associations/[SLUG]/formulaires/[ID]/widget"
+             style="width:100%;height:750px;border:none;"></iframe>
+      -->
+      <div class="donation-widget-placeholder fade-in">
+        <i class="fas fa-heart-pulse"></i>
+        <h3>Plateforme de dons en ligne</h3>
+        <p>
+          La plateforme de dons sera disponible très prochainement, dès que l'association sera officiellement validée.<br><br>
+          <!-- [PLACEHOLDER] Remplacer par le widget HelloAsso ou Stripe quand disponible -->
+          <strong>[PLACEHOLDER — Widget HelloAsso ou lien de collecte à intégrer ici]</strong>
+        </p>
+        <p style="font-size:0.85rem; color:var(--text-light);">
+          En attendant, vous pouvez nous contacter directement pour toute question sur les dons.
+        </p>
+        <a href="contact.html" class="btn btn-primary">
+          <i class="fas fa-envelope"></i> Nous contacter
+        </a>
+      </div>
+
+      <!-- Avantage fiscal -->
+      <div class="fiscal-box mt-48 fade-in">
+        <div class="fiscal-icon"><i class="fas fa-percentage"></i></div>
+        <div class="fiscal-text">
+          <h4>Avantage fiscal — Réduction d'impôt de 66%</h4>
+          <p>
+            En tant qu'association reconnue d'intérêt général (loi 1901), les dons faits à Coeurs et Sourires ouvrent droit à une <strong>réduction d'impôt de 66%</strong> du montant du don, dans la limite de 20% du revenu imposable.<br><br>
+            Exemple : un don de 50€ ne vous coûte réellement que <strong>17€</strong> après réduction d'impôt.<br><br>
+            <!-- [PLACEHOLDER] À confirmer une fois le statut d'intérêt général officiellement accordé -->
+            <em>*Sous réserve de l'obtention du statut d'intérêt général. Un reçu fiscal vous sera systématiquement envoyé.</em>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FAQ DON ===== -->
+  <section class="section bg-light">
+    <div class="container-sm">
+      <div class="section-header">
+        <span class="section-label">FAQ</span>
+        <h2 class="section-title">Questions <span>fréquentes</span> sur les dons</h2>
+        <div class="rainbow-bar"></div>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item open">
+          <button class="faq-question">
+            Mes données bancaires sont-elles sécurisées ?
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="faq-answer">
+            Oui, absolument. Nous utilisons des plateformes de paiement certifiées (HelloAsso, Stripe) qui respectent les normes PCI-DSS les plus strictes. Nous n'avons jamais accès à vos coordonnées bancaires.
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            Puis-je faire un don récurrent (mensuel) ?
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="faq-answer">
+            Oui ! Les dons mensuels sont possibles via notre plateforme de collecte en ligne. C'est la meilleure façon de nous soutenir durablement et de permettre à l'association de planifier ses actions sur le long terme.
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            Vais-je recevoir un reçu fiscal pour ma déclaration d'impôts ?
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="faq-answer">
+            Oui. Un reçu fiscal (cerfa n°11580) vous sera envoyé automatiquement par email après chaque don, ou annuellement pour les dons récurrents. Ce document vous permettra de déclarer votre don et de bénéficier de la réduction d'impôt.
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            Comment sont utilisés les dons collectés ?
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="faq-answer">
+            100% des dons sont destinés à l'achat de cadeaux pour les enfants hospitalisés. Les frais de fonctionnement de l'association sont couverts par des contributions spécifiques et ne sont jamais prélevés sur les dons. Nos comptes sont publiés chaque année en toute transparence.
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            Puis-je faire un don au nom d'une entreprise ?
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="faq-answer">
+            Bien sûr ! Les dons d'entreprises sont les bienvenus et permettent de bénéficier d'une réduction d'impôt de 60% du montant du don (article 238 bis du CGI), dans la limite de 0,5% du chiffre d'affaires. Contactez-nous pour un partenariat sur-mesure.
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            Puis-je faire un don en espèces ou par chèque ?
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="faq-answer">
+            <!-- [PLACEHOLDER] À confirmer selon les modalités définies par l'association -->
+            Oui, il est possible de faire un don par chèque libellé à l'ordre de "Association Coeurs et Sourires" et envoyé à notre adresse. Pour les dons en espèces, contactez-nous pour convenir des modalités. [ADRESSE SIÈGE SOCIAL]
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA CONTACT ===== -->
+  <section class="section cta-donate">
+    <div class="container">
+      <h2 class="cta-donate-title fade-in"><i class="fas fa-question-circle"></i> Une question sur votre don&nbsp;?</h2>
+      <p class="cta-donate-desc fade-in">Notre équipe est disponible pour vous accompagner et répondre à toutes vos questions.</p>
+      <div class="cta-donate-actions fade-in">
+        <a href="contact.html" class="btn btn-gold btn-lg"><i class="fas fa-envelope"></i> Nous contacter</a>
+        <a href="nous-connaitre.html" class="btn btn-outline btn-lg"><i class="fas fa-info-circle"></i> En savoir plus</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <div class="footer-rainbow"></div>
+    <div class="footer-top">
+      <div class="container">
+        <div class="footer-grid">
+          <div class="footer-brand">
+            <div class="footer-logo">
+              <img src="images/Logo_détouré.png" alt="Coeurs et Sourires" />
+              <div>
+                <div class="footer-logo-text">Coeurs et Sourires</div>
+                <div class="footer-logo-sub">Association</div>
+              </div>
+            </div>
+            <p class="footer-desc">Association à but non lucratif fondée par Cathia ETESSE.</p>
+            <div class="footer-social">
+              <a href="#" class="footer-social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+              <a href="#" class="footer-social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+              <a href="#" class="footer-social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+          </div>
+          <div class="footer-col">
+            <h4>Navigation</h4>
+            <ul class="footer-links">
+              <li><a href="index.html"><i class="fas fa-chevron-right"></i> Accueil</a></li>
+              <li><a href="nous-connaitre.html"><i class="fas fa-chevron-right"></i> Nous connaître</a></li>
+              <li><a href="nos-actions.html"><i class="fas fa-chevron-right"></i> Nos actions</a></li>
+              <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Contact</a></li>
+              <li><a href="faire-un-don.html"><i class="fas fa-chevron-right"></i> Faire un don</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Informations</h4>
+            <ul class="footer-links">
+              <li><a href="mentions-legales.html"><i class="fas fa-chevron-right"></i> Mentions légales</a></li>
+              <li><a href="politique-confidentialite.html"><i class="fas fa-chevron-right"></i> Confidentialité</a></li>
+              <li><a href="politique-cookies.html"><i class="fas fa-chevron-right"></i> Cookies</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Contact</h4>
+            <ul class="footer-links">
+              <li><a href="mailto:[EMAIL CONTACT]"><i class="fas fa-envelope"></i> [EMAIL CONTACT]</a></li>
+              <li><a href="#"><i class="fas fa-map-marker-alt"></i> [ADRESSE SIÈGE SOCIAL]</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <div class="footer-bottom-content">
+          <p class="footer-copyright">© 2025 Association Coeurs et Sourires — Fondée par Cathia ETESSE. Tous droits réservés.</p>
+          <div class="footer-legal-links">
+            <a href="mentions-legales.html">Mentions légales</a>
+            <a href="politique-confidentialite.html">Confidentialité</a>
+            <a href="politique-cookies.html">Cookies</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <div class="cookie-banner" id="cookieBanner">
+    <div class="cookie-icon">🍪</div>
+    <div class="cookie-text">
+      <h4>Ce site utilise des cookies</h4>
+      <p>Nous utilisons des cookies pour améliorer votre expérience. En continuant, vous acceptez notre <a href="politique-cookies.html">politique de cookies</a>.</p>
+    </div>
+    <div class="cookie-actions">
+      <button class="btn-cookie-accept" id="cookieAccept">Tout accepter</button>
+      <button class="btn-cookie-refuse" id="cookieRefuse">Refuser</button>
+      <button class="btn-cookie-settings" id="cookieSettings">Personnaliser</button>
+    </div>
+  </div>
+
+  <button id="backTop" aria-label="Retour en haut" style="position:fixed;bottom:32px;right:32px;width:48px;height:48px;border-radius:50%;background:var(--pink);color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.1rem;box-shadow:0 4px 20px rgba(233,30,140,0.4);opacity:0;transition:opacity 0.3s;z-index:999">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <script>
+    function selectAmount(btn, amount) {
+      document.querySelectorAll('.donation-amount-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    }
+  </script>
+  <script src="js/main.js"></script>
+</body>
+</html>
