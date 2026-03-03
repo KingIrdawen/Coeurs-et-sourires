@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Static HTML/CSS/JS website for **Association Coeurs et Sourires**, a French non-profit that collects donations to buy gifts for long-term hospitalized children. Founded by Cathia ETESSE.
+Static HTML/CSS/JS website for **Association Coeurs et Sourires**, a French non-profit that collects donations to buy gifts for long-term hospitalized children.
 
 No build system, no framework, no package manager. Files are served directly — deploy as-is to any static host (Vercel preset: **Other**, no build command).
 
@@ -85,7 +85,7 @@ Many `[PLACEHOLDER]` markers exist throughout the HTML. Key ones:
 - `[PLACEHOLDER — N° RNA]` — association registration number
 - `[PLACEHOLDER — Numéro SIRET]` — SIRET number
 - `[PLACEHOLDER — Date officielle de création]` — official founding date
-- `[PLACEHOLDER — Photo de Cathia ETESSE]` — founder photo in `nous-connaitre.html`
+- `[PLACEHOLDER — Photo de la fondatrice]` — founder photo in `nous-connaitre.html`
 - `[PLACEHOLDER — Histoire détaillée]` — founder's biography text
 - `[PLACEHOLDER — Widget HelloAsso]` — payment widget iframe in `faire-un-don.html`
 - `[NOM DE L'HÉBERGEUR]` — web host name/address (required for legal pages)
