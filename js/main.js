@@ -228,6 +228,144 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+  /* -------- Ciel étoilé animé (hero page d'accueil) -------- */
+  (function initHeroStars() {
+    const canvas = document.getElementById('heroStars');
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    const hero = canvas.closest('.hero');
+
+    // ── Générer les étoiles ──────────────────────────────────────
+    const STAR_COUNT = 240;
+    let stars = [];
+
+    function buildStars() {
+      stars = [];
+      for (let i = 0; i < STAR_COUNT; i++) {
+        const isBright  = Math.random() < 0.08;   // 8 % d'étoiles lumineuses
+        const isSporadic = Math.random() < 0.13;  // 13 % scintillent sporadiquement
+
+        // Répartition : concentrées en haut du ciel, moins vers l'horizon
+        const yRaw = Math.random();
+        const y    = Math.pow(yRaw, 1.6) * 0.80;  // 0..0.80 (evite l'horizon chaud)
+
+        // Couleurs d'étoiles : blanc, bleu-blanc, ivoire chaud
+        const palette = [
+          [255, 255, 255],   // blanc pur
+          [200, 220, 255],   // bleu-blanc (étoile chaude)
+          [255, 245, 200],   // ivoire (étoile froide)
+          [255, 230, 180],   // doré doux
+        ];
+        const color = palette[Math.floor(Math.random() * palette.length)];
+
+        stars.push({
+          x:             Math.random(),
+          y,
+          r:             isBright ? (Math.random() * 1.4 + 1.6) : (Math.random() * 0.9 + 0.3),
+          baseOp:        Math.random() * 0.45 + (isBright ? 0.45 : 0.20),
+          twinkleSpeed:  Math.random() * 1.4 + 0.3,
+          twinkleAmp:    Math.random() * 0.20 + 0.06,
+          phase:         Math.random() * Math.PI * 2,
+          color,
+          isBright,
+          isSporadic,
+          // Minuterie de scintillement sporadique
+          sporadicTimer:  isSporadic ? (Math.random() * 7 + 3) : 0,
+          sporadicActive: false,
+          sporadicLife:   0,
+        });
+      }
+    }
+
+    // ── Redimensionnement ────────────────────────────────────────
+    function resize() {
+      canvas.width  = hero ? hero.offsetWidth  : window.innerWidth;
+      canvas.height = hero ? hero.offsetHeight : window.innerHeight;
+      buildStars();
+    }
+    resize();
+    window.addEventListener('resize', resize, { passive: true });
+
+    // ── Boucle d'animation ───────────────────────────────────────
+    let t    = 0;
+    let last = performance.now();
+
+    function draw(now) {
+      const dt = Math.min((now - last) / 1000, 0.05);
+      last = now;
+      t   += dt;
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      stars.forEach(function (s) {
+        // Scintillement de base (sinus doux)
+        let op = s.baseOp + Math.sin(t * s.twinkleSpeed + s.phase) * s.twinkleAmp;
+
+        // Scintillement sporadique : flash bref et aléatoire
+        if (s.isSporadic) {
+          s.sporadicTimer -= dt;
+          if (s.sporadicActive) {
+            s.sporadicLife -= dt;
+            if (s.sporadicLife <= 0) {
+              s.sporadicActive = false;
+              s.sporadicTimer  = Math.random() * 8 + 4; // pause 4-12 s
+            } else {
+              // Flash : courbe en cloche sur la durée du flash
+              const prog = s.sporadicLife / 0.45;
+              op = 0.95 * Math.sin(prog * Math.PI);
+            }
+          } else if (s.sporadicTimer <= 0) {
+            s.sporadicActive = true;
+            s.sporadicLife   = 0.3 + Math.random() * 0.35; // flash 0.3-0.65 s
+          }
+        }
+
+        // Fondu vers l'horizon (zone chaude en bas)
+        const horizonFade = Math.min(1, (0.76 - s.y) / 0.10);
+        op = Math.max(0, Math.min(1, op)) * Math.max(0, horizonFade);
+        if (op < 0.02) return;
+
+        const x = s.x * canvas.width;
+        const y = s.y * canvas.height;
+        const [r, g, b] = s.color;
+
+        // ── Point central ──
+        ctx.beginPath();
+        ctx.arc(x, y, s.r, 0, Math.PI * 2);
+        ctx.fillStyle = 'rgba(' + r + ',' + g + ',' + b + ',' + op + ')';
+        ctx.fill();
+
+        // ── Halo doux pour les étoiles brillantes ──
+        if (s.r > 1.3 && op > 0.25) {
+          const gR  = s.r * 5;
+          const grd = ctx.createRadialGradient(x, y, 0, x, y, gR);
+          grd.addColorStop(0, 'rgba(' + r + ',' + g + ',' + b + ',' + (op * 0.38) + ')');
+          grd.addColorStop(1, 'rgba(' + r + ',' + g + ',' + b + ',0)');
+          ctx.beginPath();
+          ctx.arc(x, y, gR, 0, Math.PI * 2);
+          ctx.fillStyle = grd;
+          ctx.fill();
+        }
+
+        // ── Petite croix de diffraction pour les étoiles très lumineuses ──
+        if (s.isBright && op > 0.55) {
+          const len = s.r * 6 * op;
+          ctx.strokeStyle = 'rgba(' + r + ',' + g + ',' + b + ',' + (op * 0.35) + ')';
+          ctx.lineWidth = 0.6;
+          ctx.beginPath();
+          ctx.moveTo(x - len, y); ctx.lineTo(x + len, y);
+          ctx.moveTo(x, y - len); ctx.lineTo(x, y + len);
+          ctx.stroke();
+        }
+      });
+
+      requestAnimationFrame(draw);
+    }
+
+    requestAnimationFrame(draw);
+  })();
+
   /* -------- Back to top -------- */
   const backTop = document.getElementById('backTop');
   if (backTop) {
