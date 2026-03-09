@@ -405,7 +405,7 @@ p:last-child { margin-bottom: 0; }
 /* --- Hero Section --- */
 .hero {
   min-height: 100vh;
-  background-image: url('../images/image hero.PNG');
+  background-image: url('../images/image-hero.PNG');
   background-size: cover;
   background-position: center center;
   background-attachment: fixed;
