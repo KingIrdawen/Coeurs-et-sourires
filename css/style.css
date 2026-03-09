@@ -405,60 +405,22 @@ p:last-child { margin-bottom: 0; }
 /* --- Hero Section --- */
 .hero {
   min-height: 100vh;
-  /* Ciel crépusculaire : zenith nuit profonde → horizon chaud doré */
-  background: linear-gradient(to bottom,
-    #010210 0%,
-    #040b26 10%,
-    #091540 22%,
-    #111d6a 35%,
-    #1a1473 46%,
-    #22176a 53%,
-    #361b72 60%,
-    #582268 67%,
-    #7e2858 73%,
-    #a03040 79%,
-    #bf4a20 84%,
-    #d46820 88%,
-    #e27c26 92%,
-    #e88a30 95%,
-    #d87830 98%,
-    #b86028 100%
-  );
+  background-image: url('../images/image hero.PNG');
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed;
   display: flex;
   align-items: center;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
   padding-top: 80px;
 }
 
 .hero-bg {
   position: absolute;
   inset: 0;
-  overflow: hidden;
-  pointer-events: none;
-}
-
-/* Canvas des étoiles animées */
-.hero-canvas {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}
-
-/* Lueur chaude diffuse à l'horizon */
-.hero-horizon-glow {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 38%;
-  background: radial-gradient(ellipse 90% 100% at 50% 100%,
-    rgba(230, 120, 35, 0.30) 0%,
-    rgba(170, 70, 15, 0.15) 45%,
-    transparent 100%
-  );
+  /* Voile sombre pour assurer la lisibilité du texte */
+  background: rgba(5, 8, 30, 0.45);
   pointer-events: none;
 }
 
