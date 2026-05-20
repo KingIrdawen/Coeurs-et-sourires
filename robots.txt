@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Exclure les ressources non pertinentes pour le référencement
+Disallow: /css/
+Disallow: /js/
+
+Sitemap: https://www.coeurs-et-sourires.fr/sitemap.xml
