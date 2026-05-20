@@ -119,7 +119,7 @@
         <h3>5.1 Via notre bandeau de consentement</h3>
         <p>Lors de votre première visite, un bandeau vous propose d'accepter, refuser ou personnaliser les cookies. Vous pouvez modifier votre choix à tout moment en cliquant sur le bouton ci-dessous :</p>
         <div style="margin:24px 0;">
-          <button onclick="localStorage.removeItem('cs_cookie_consent'); location.reload();" class="btn btn-outline-primary">
+          <button onclick="localStorage.removeItem('cs_cookie_consent'); document.getElementById('cookieBanner').classList.add('show');" class="btn btn-outline-primary">
             <i class="fas fa-cog"></i> Gérer mes préférences de cookies
           </button>
         </div>
