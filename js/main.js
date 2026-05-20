@@ -150,6 +150,17 @@ document.addEventListener('DOMContentLoaded', function () {
   const COOKIE_KEY = 'cs_cookie_consent';
   const banner = document.getElementById('cookieBanner');
 
+  // Bouton "Gérer mes préférences" sur la page politique-cookies.html
+  const resetBtn = document.getElementById('resetCookieConsent');
+  if (resetBtn) {
+    resetBtn.addEventListener('click', function () {
+      localStorage.removeItem(COOKIE_KEY);
+      if (banner) {
+        banner.classList.add('show');
+      }
+    });
+  }
+
   if (banner) {
     const accepted = localStorage.getItem(COOKIE_KEY);
     if (!accepted) {
