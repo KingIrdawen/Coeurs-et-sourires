@@ -5,36 +5,26 @@
 
 document.addEventListener('DOMContentLoaded', function () {
 
-  /* -------- Dynamic header positioning (alert banner aware) -------- */
-  const alertBanner = document.querySelector('.alert-banner');
+  /* -------- Dynamic header positioning -------- */
   const navbar = document.querySelector('.navbar');
-
-  function getAlertHeight() {
-    return alertBanner ? alertBanner.offsetHeight : 0;
-  }
+  const NAV_H = 80; // hauteur fixe de la navbar
 
   function updateHeaderPositions() {
     if (!navbar) return;
-    const alertH = getAlertHeight();
-    const navH = 80; // fixed nav height
 
-    // Reposition navbar below alert banner
-    navbar.style.top = alertH + 'px';
+    navbar.style.top = '0px';
 
     // Reposition mobile dropdown below navbar
     const navLinks = document.querySelector('.nav-links');
     if (navLinks && window.innerWidth <= 900) {
-      navLinks.style.top = (alertH + navH) + 'px';
+      navLinks.style.top = NAV_H + 'px';
     } else if (navLinks) {
       navLinks.style.top = '';
     }
 
-    // Adjust hero/page-hero top margin to avoid overlap
-    const hero = document.querySelector('.hero');
-    if (hero) hero.style.marginTop = alertH + 'px';
-
+    // Adjust page-hero top padding to avoid overlap
     const pageHero = document.querySelector('.page-hero');
-    if (pageHero) pageHero.style.paddingTop = (alertH + navH + 40) + 'px';
+    if (pageHero) pageHero.style.paddingTop = (NAV_H + 40) + 'px';
   }
 
   updateHeaderPositions();
@@ -204,27 +194,45 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  /* -------- Contact form (front-end validation) -------- */
+  /* -------- Contact form (soumission Formspree) -------- */
   const contactForm = document.getElementById('contactForm');
   if (contactForm) {
-    contactForm.addEventListener('submit', function (e) {
+    contactForm.addEventListener('submit', async function (e) {
       e.preventDefault();
       const btn = contactForm.querySelector('button[type="submit"]');
       const originalText = btn.innerHTML;
       btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Envoi en cours...';
       btn.disabled = true;
 
-      // Simulate (replace with real backend call)
-      setTimeout(() => {
-        btn.innerHTML = '<i class="fas fa-check"></i> Message envoyé !';
-        btn.style.background = '#4caf50';
-        contactForm.reset();
+      try {
+        const data = new FormData(contactForm);
+        const response = await fetch(contactForm.action, {
+          method: 'POST',
+          body: data,
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (response.ok) {
+          btn.innerHTML = '<i class="fas fa-check"></i> Message envoyé !';
+          btn.style.background = '#4caf50';
+          contactForm.reset();
+          setTimeout(() => {
+            btn.innerHTML = originalText;
+            btn.style.background = '';
+            btn.disabled = false;
+          }, 4000);
+        } else {
+          throw new Error('Erreur serveur');
+        }
+      } catch {
+        btn.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Erreur — réessayez';
+        btn.style.background = '#e53935';
         setTimeout(() => {
           btn.innerHTML = originalText;
           btn.style.background = '';
           btn.disabled = false;
-        }, 3000);
-      }, 1500);
+        }, 4000);
+      }
     });
   }
 
