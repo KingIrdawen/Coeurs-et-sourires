@@ -75,38 +75,6 @@
     </div>
   </section>
 
-  <!-- ===== MONTANTS SUGGÉRÉS ===== -->
-  <section class="section-sm bg-light">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-label">Choisissez votre don</span>
-        <h2 class="section-title">Quel impact pour <span>votre don</span>&nbsp;?</h2>
-        <p class="section-subtitle">Chaque montant, aussi modeste soit-il, a un impact concret sur la vie d'un enfant.</p>
-        <div class="rainbow-bar"></div>
-      </div>
-      <div class="donation-amounts">
-        <button class="donation-amount-btn" onclick="selectAmount(this, 10)">
-          <span class="amount">10€</span>
-          <span class="impact">Un livre ou une petite peluche pour un enfant</span>
-        </button>
-        <button class="donation-amount-btn active" onclick="selectAmount(this, 25)">
-          <span class="amount">25€</span>
-          <span class="impact">Un jeu de société ou un kit créatif complet</span>
-        </button>
-        <button class="donation-amount-btn" onclick="selectAmount(this, 50)">
-          <span class="amount">50€</span>
-          <span class="impact">Un cadeau personnalisé de qualité pour un enfant</span>
-        </button>
-        <button class="donation-amount-btn" onclick="selectAmount(this, 100)">
-          <span class="amount">100€</span>
-          <span class="impact">Des cadeaux pour plusieurs enfants d'un même service</span>
-        </button>
-      </div>
-      <div style="text-align:center; margin-bottom:40px;">
-        <p style="font-size:0.9rem; color:var(--text-muted);">Vous souhaitez donner un autre montant ?</p>
-      </div>
-    </div>
-  </section>
 
   <!-- ===== WIDGET DON ===== -->
   <section class="section">
@@ -228,12 +196,6 @@
     <i class="fas fa-chevron-up"></i>
   </button>
 
-  <script>
-    function selectAmount(btn, amount) {
-      document.querySelectorAll('.donation-amount-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-    }
-  </script>
   <script src="js/main.js"></script>
 </body>
 </html>
