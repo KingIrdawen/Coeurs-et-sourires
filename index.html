@@ -326,5 +326,61 @@
   </button>
 
   <script src="js/main.js"></script>
+
+  <!-- ===== LIGHTBOX AFFICHES ===== -->
+  <div class="lightbox-overlay" id="lightboxOverlay" role="dialog" aria-modal="true" aria-label="Image agrandie">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Fermer">&times;</button>
+    <img id="lightboxImg" src="" alt="">
+  </div>
+  <script>
+    (function () {
+      var overlay = document.getElementById('lightboxOverlay');
+      var lightboxImg = document.getElementById('lightboxImg');
+      var closeBtn = document.getElementById('lightboxClose');
+      var cards = document.querySelectorAll('.affiche-card');
+      if (!overlay || !cards.length) return;
+
+      function open(img) {
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function close() {
+        overlay.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      var isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+
+      cards.forEach(function (card) {
+        var img = card.querySelector('img');
+
+        if (!isTouchDevice) {
+          // Desktop : survol souris
+          card.addEventListener('mouseenter', function () { open(img); });
+          card.addEventListener('mouseleave', close);
+        }
+
+        // Clic / appui tactile (fonctionne sur mobile ET desktop)
+        card.addEventListener('click', function (e) {
+          e.stopPropagation();
+          overlay.classList.contains('active') ? close() : open(img);
+        });
+      });
+
+      // Fermer en cliquant sur le fond
+      overlay.addEventListener('click', close);
+      // Empêcher la fermeture en cliquant sur l'image elle-même
+      lightboxImg.addEventListener('click', function (e) { e.stopPropagation(); });
+      // Bouton ×
+      closeBtn.addEventListener('click', function (e) { e.stopPropagation(); close(); });
+      // Touche Échap
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') close();
+      });
+    })();
+  </script>
 </body>
 </html>

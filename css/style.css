@@ -966,6 +966,12 @@ p:last-child { margin-bottom: 0; }
   overflow: hidden;
   box-shadow: var(--shadow);
   cursor: zoom-in;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.affiche-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
 }
 
 .affiche-card img {
@@ -973,36 +979,55 @@ p:last-child { margin-bottom: 0; }
   height: 420px;
   object-fit: cover;
   display: block;
-  transition: box-shadow 0.3s ease;
-}
-
-/* Fond sombre au survol */
-.affiche-card:hover::before {
-  content: '';
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0, 0, 0, 0.82);
-  z-index: 9998;
-}
-
-/* Image en plein écran au survol */
-.affiche-card:hover img {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: auto;
-  height: 90vh;
-  max-width: 90vw;
-  object-fit: contain;
-  z-index: 9999;
-  border-radius: var(--radius);
-  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6);
 }
 
 @media (max-width: 768px) {
   .affiche-card img { height: 260px; }
 }
+
+/* --- Lightbox --- */
+.lightbox-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.88);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+  cursor: zoom-out;
+}
+.lightbox-overlay.active {
+  display: flex;
+}
+.lightbox-overlay img {
+  max-width: 92vw;
+  max-height: 92vh;
+  object-fit: contain;
+  border-radius: var(--radius);
+  box-shadow: 0 32px 100px rgba(0, 0, 0, 0.7);
+  cursor: default;
+  user-select: none;
+}
+.lightbox-close {
+  position: fixed;
+  top: 20px;
+  right: 24px;
+  background: rgba(255,255,255,0.15);
+  border: none;
+  color: #fff;
+  font-size: 2rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  transition: background 0.2s;
+  z-index: 10000;
+}
+.lightbox-close:hover { background: rgba(255,255,255,0.3); }
 
 /* --- Testimonials --- */
 .testimonials {
