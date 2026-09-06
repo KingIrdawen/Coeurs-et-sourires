@@ -970,7 +970,6 @@ p:last-child { margin-bottom: 0; }
 }
 
 .affiche-card:hover {
-  transform: translateY(-4px);
   box-shadow: var(--shadow-lg);
 }
 

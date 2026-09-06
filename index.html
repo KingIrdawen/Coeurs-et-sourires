@@ -352,21 +352,12 @@
         document.body.style.overflow = '';
       }
 
-      var isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
-
+      // Clic / appui tactile — desktop ET mobile
       cards.forEach(function (card) {
         var img = card.querySelector('img');
-
-        if (!isTouchDevice) {
-          // Desktop : survol souris
-          card.addEventListener('mouseenter', function () { open(img); });
-          card.addEventListener('mouseleave', close);
-        }
-
-        // Clic / appui tactile (fonctionne sur mobile ET desktop)
         card.addEventListener('click', function (e) {
           e.stopPropagation();
-          overlay.classList.contains('active') ? close() : open(img);
+          open(img);
         });
       });
 
