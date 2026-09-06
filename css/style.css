@@ -1376,7 +1376,6 @@ p:last-child { margin-bottom: 0; }
   font-family: var(--font-body);
 }
 
-.donation-amount-btn:hover,
 .donation-amount-btn.active {
   border-color: var(--pink);
   background: rgba(233, 30, 140, 0.05);
