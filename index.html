@@ -340,15 +340,22 @@
       var cards = document.querySelectorAll('.affiche-card');
       if (!overlay || !cards.length) return;
 
+      var openTime = 0; // Horodatage d'ouverture pour bloquer les ghost clicks
+
       function open(img) {
+        openTime = Date.now();
         lightboxImg.src = img.src;
         lightboxImg.alt = img.alt;
         overlay.classList.add('active');
+        document.documentElement.style.overflow = 'hidden';
         document.body.style.overflow = 'hidden';
       }
 
       function close() {
+        // Ignorer les clics survenant dans les 400 ms après l'ouverture (ghost click)
+        if (Date.now() - openTime < 400) return;
         overlay.classList.remove('active');
+        document.documentElement.style.overflow = '';
         document.body.style.overflow = '';
       }
 
@@ -361,15 +368,26 @@
         });
       });
 
-      // Fermer en cliquant sur le fond
-      overlay.addEventListener('click', close);
-      // Empêcher la fermeture en cliquant sur l'image elle-même
-      lightboxImg.addEventListener('click', function (e) { e.stopPropagation(); });
+      // Fermer en cliquant sur le fond sombre
+      overlay.addEventListener('click', function (e) {
+        if (e.target === overlay) close();
+      });
       // Bouton ×
-      closeBtn.addEventListener('click', function (e) { e.stopPropagation(); close(); });
+      closeBtn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        openTime = 0; // Forcer la fermeture même si rapide
+        overlay.classList.remove('active');
+        document.documentElement.style.overflow = '';
+        document.body.style.overflow = '';
+      });
       // Touche Échap
       document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape') close();
+        if (e.key === 'Escape') {
+          openTime = 0;
+          overlay.classList.remove('active');
+          document.documentElement.style.overflow = '';
+          document.body.style.overflow = '';
+        }
       });
     })();
   </script>
