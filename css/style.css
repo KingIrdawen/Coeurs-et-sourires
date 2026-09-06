@@ -984,53 +984,7 @@ p:last-child { margin-bottom: 0; }
   .affiche-card img { height: 260px; }
 }
 
-/* --- Lightbox --- */
-.lightbox-overlay {
-  display: none;
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.88);
-  z-index: 9999;
-  cursor: zoom-out;
-}
-.lightbox-overlay.active {
-  display: block;
-}
-.lightbox-overlay img {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  max-width: 92vw;
-  max-height: 92vh;
-  object-fit: contain;
-  border-radius: var(--radius);
-  box-shadow: 0 32px 100px rgba(0, 0, 0, 0.7);
-  cursor: default;
-  user-select: none;
-}
-.lightbox-close {
-  position: absolute;
-  top: 20px;
-  right: 24px;
-  background: rgba(255,255,255,0.15);
-  border: none;
-  color: #fff;
-  font-size: 2rem;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  line-height: 1;
-  transition: background 0.2s;
-  z-index: 10000;
-}
-.lightbox-close:hover { background: rgba(255,255,255,0.3); }
+/* Lightbox : entièrement géré en JS inline styles */
 
 /* --- Testimonials --- */
 .testimonials {

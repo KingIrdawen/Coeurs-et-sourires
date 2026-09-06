@@ -328,66 +328,99 @@
   <script src="js/main.js"></script>
 
   <!-- ===== LIGHTBOX AFFICHES ===== -->
-  <div class="lightbox-overlay" id="lightboxOverlay" role="dialog" aria-modal="true" aria-label="Image agrandie">
-    <button class="lightbox-close" id="lightboxClose" aria-label="Fermer">&times;</button>
-    <img id="lightboxImg" src="" alt="">
-  </div>
   <script>
     (function () {
-      var overlay = document.getElementById('lightboxOverlay');
-      var lightboxImg = document.getElementById('lightboxImg');
-      var closeBtn = document.getElementById('lightboxClose');
-      var cards = document.querySelectorAll('.affiche-card');
-      if (!overlay || !cards.length) return;
+      var openTime = 0;
 
-      var openTime = 0; // Horodatage d'ouverture pour bloquer les ghost clicks
+      // Créer l'overlay entièrement en JS avec styles inline
+      var overlay = document.createElement('div');
+      overlay.setAttribute('role', 'dialog');
+      overlay.setAttribute('aria-modal', 'true');
+      overlay.style.cssText = [
+        'display:none',
+        'position:fixed',
+        'top:0','left:0',
+        'width:100%','height:100%',
+        'background:rgba(0,0,0,0.9)',
+        'z-index:2147483647',
+        'cursor:zoom-out'
+      ].join(';');
 
-      function open(img) {
+      // Bouton fermer
+      var closeBtn = document.createElement('button');
+      closeBtn.innerHTML = '&times;';
+      closeBtn.setAttribute('aria-label', 'Fermer');
+      closeBtn.style.cssText = [
+        'position:absolute','top:16px','right:20px',
+        'background:rgba(255,255,255,0.2)',
+        'border:none','color:#fff',
+        'font-size:2rem','font-family:sans-serif',
+        'width:44px','height:44px',
+        'border-radius:50%','cursor:pointer',
+        'display:flex','align-items:center','justify-content:center',
+        'line-height:1','z-index:1'
+      ].join(';');
+
+      // Image
+      var lightboxImg = document.createElement('img');
+      lightboxImg.style.cssText = [
+        'position:absolute',
+        'top:50%','left:50%',
+        'transform:translate(-50%,-50%)',
+        'max-width:92vw','max-height:92vh',
+        'object-fit:contain',
+        'border-radius:8px',
+        'box-shadow:0 32px 100px rgba(0,0,0,0.7)',
+        'cursor:default',
+        'display:block'
+      ].join(';');
+
+      overlay.appendChild(closeBtn);
+      overlay.appendChild(lightboxImg);
+      document.body.appendChild(overlay);
+
+      function forceClose() {
+        overlay.style.display = 'none';
+        document.documentElement.style.overflow = '';
+        document.body.style.overflow = '';
+      }
+
+      function open(src, alt) {
         openTime = Date.now();
-        lightboxImg.src = img.src;
-        lightboxImg.alt = img.alt;
-        overlay.classList.add('active');
+        lightboxImg.src = src;
+        lightboxImg.alt = alt || '';
+        overlay.style.display = 'block';
         document.documentElement.style.overflow = 'hidden';
         document.body.style.overflow = 'hidden';
       }
 
       function close() {
-        // Ignorer les clics survenant dans les 400 ms après l'ouverture (ghost click)
-        if (Date.now() - openTime < 400) return;
-        overlay.classList.remove('active');
-        document.documentElement.style.overflow = '';
-        document.body.style.overflow = '';
+        if (Date.now() - openTime < 400) return; // anti ghost-click
+        forceClose();
       }
 
-      // Clic / appui tactile — desktop ET mobile
-      cards.forEach(function (card) {
+      // Attacher aux cartes
+      document.querySelectorAll('.affiche-card').forEach(function (card) {
         var img = card.querySelector('img');
+        card.style.cursor = 'zoom-in';
         card.addEventListener('click', function (e) {
           e.stopPropagation();
-          open(img);
+          open(img.src, img.alt);
         });
       });
 
-      // Fermer en cliquant sur le fond sombre
       overlay.addEventListener('click', function (e) {
         if (e.target === overlay) close();
       });
-      // Bouton ×
       closeBtn.addEventListener('click', function (e) {
         e.stopPropagation();
-        openTime = 0; // Forcer la fermeture même si rapide
-        overlay.classList.remove('active');
-        document.documentElement.style.overflow = '';
-        document.body.style.overflow = '';
+        forceClose();
       });
-      // Touche Échap
+      lightboxImg.addEventListener('click', function (e) {
+        e.stopPropagation();
+      });
       document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape') {
-          openTime = 0;
-          overlay.classList.remove('active');
-          document.documentElement.style.overflow = '';
-          document.body.style.overflow = '';
-        }
+        if (e.key === 'Escape') forceClose();
       });
     })();
   </script>
