@@ -80,27 +80,17 @@
   <section class="section">
     <div class="container-sm">
 
-      <!-- [PLACEHOLDER] Widget HelloAsso -->
-      <!-- Pour activer les dons en ligne, créez un compte sur HelloAsso (https://www.helloasso.com)
-           ou Stripe, configurez votre collecte et remplacez ce bloc par leur widget/iframe officiel.
-           Exemple HelloAsso :
-           <iframe id="haWidgetCrowdfunding" src="https://www.helloasso.com/associations/[SLUG]/formulaires/[ID]/widget"
-             style="width:100%;height:750px;border:none;"></iframe>
-      -->
-      <div class="donation-widget-placeholder fade-in">
-        <i class="fas fa-heart-pulse"></i>
-        <h3>Les dons en ligne arrivent bientôt&nbsp;!</h3>
-        <p>
-          La collecte de dons en ligne n'est pas encore disponible, mais elle ouvrira très prochainement.<br><br>
-          Merci pour votre patience et votre soutien — chaque futur don contribuera directement à apporter des sourires aux enfants hospitalisés.
-        </p>
-        <p style="font-size:0.85rem; color:var(--text-light);">
-          En attendant, n'hésitez pas à nous contacter pour toute question.
-        </p>
-        <a href="contact.html" class="btn btn-primary">
-          <i class="fas fa-envelope"></i> Nous contacter
-        </a>
-      </div>
+      <!-- Widget HelloAsso -->
+      <iframe id="haWidget" allowtransparency="true" scrolling="auto"
+        src="https://www.helloasso.com/associations/c-urs-et-sourires/formulaires/2/widget"
+        style="width: 100%; height: 750px; border: none;"
+        onload="window.addEventListener('message', function(e) {
+          const dataHeight = e.data.height;
+          const haWidgetElement = document.getElementById('haWidget');
+          if (dataHeight > parseFloat(haWidgetElement.height || 0)) {
+            haWidgetElement.height = dataHeight + 'px';
+          }
+        })"></iframe>
 
     </div>
   </section>
