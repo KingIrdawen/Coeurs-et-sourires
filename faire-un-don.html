@@ -92,7 +92,15 @@
         window.addEventListener('message', function(e) {
           if (e.data && e.data.height) {
             var widget = document.getElementById('haWidget');
-            if (widget) widget.style.height = e.data.height + 'px';
+            if (widget) {
+              var newHeight = parseInt(e.data.height, 10);
+              var currentHeight = parseInt(widget.style.height, 10) || 750;
+              widget.style.height = newHeight + 'px';
+              // Si le widget rétrécit, remonter au début du widget
+              if (newHeight < currentHeight) {
+                widget.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              }
+            }
           }
         });
       </script>
