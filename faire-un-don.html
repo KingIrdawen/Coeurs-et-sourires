@@ -98,8 +98,7 @@
               widget.style.height = newHeight + 'px';
               // Si le widget rétrécit, remonter juste au-dessus du widget (navbar + marge)
               if (newHeight < currentHeight) {
-                var offsetTop = widget.getBoundingClientRect().top + window.pageYOffset - 100;
-                window.scrollTo({ top: offsetTop, behavior: 'smooth' });
+                window.scrollTo({ top: widget.offsetTop - 100, behavior: 'smooth' });
               }
             }
           }
