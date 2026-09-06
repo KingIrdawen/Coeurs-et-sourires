@@ -96,9 +96,10 @@
               var newHeight = parseInt(e.data.height, 10);
               var currentHeight = parseInt(widget.style.height, 10) || 750;
               widget.style.height = newHeight + 'px';
-              // Si le widget rétrécit, remonter au début du widget
+              // Si le widget rétrécit, remonter juste au-dessus du widget (navbar + marge)
               if (newHeight < currentHeight) {
-                widget.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                var offsetTop = widget.getBoundingClientRect().top + window.pageYOffset - 100;
+                window.scrollTo({ top: offsetTop, behavior: 'smooth' });
               }
             }
           }
